@@ -6,5 +6,8 @@
 				<Cpu CpuId="7"/>
 			</Settings>
 		</System>
+		<Io>
+			<Device File="Master (EtherCAT).xti" Id="1"/>
+		</Io>
 	</Project>
 </TcSmProject>

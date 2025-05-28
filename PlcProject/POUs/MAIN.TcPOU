@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="MAIN" Id="{57926717-fe8b-433d-8dcb-c8a294a9edad}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+    fbEdgeDetection : FB_AuFlankenauswertung;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[fbEdgeDetection(Ix_Reset := NOT GVL_CouplerOnDesk.bSelectorSwitchLeftNC);]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

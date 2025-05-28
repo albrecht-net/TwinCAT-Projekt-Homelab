@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4026.16" ClassName="CTComPlcObjDef">
+	<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" XtvPath="PlcProject\PlcProject Instance.xtv">
+		<Name>__FILENAME__</Name>
+		<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+		<Contexts>
+			<Context>
+				<Id>0</Id>
+				<Name>PlcTask</Name>
+				<ManualConfig>
+					<OTCID>#x02010030</OTCID>
+				</ManualConfig>
+				<Priority>20</Priority>
+				<CycleTime>10000000</CycleTime>
+			</Context>
+		</Contexts>
+		<TaskPouOids>
+			<TaskPouOid Prio="20" OTCID="#x08502001"/>
+		</TaskPouOids>
+	</Instance>
+	<Mappings>
+		<OwnerA>
+			<OwnerB Name="TIID^Master (EtherCAT)">
+				<Link VarA="PlcTask Inputs^GVL_CouplerOnDesk.bHotConnectGrpState" VarB="SyncUnits^[DeskGroup]^PlcTask^InfoData^State"/>
+				<Link VarA="PlcTask Inputs^GVL_CouplerOnDesk.bHotConnectGrpWcState" VarB="SyncUnits^[DeskGroup]^PlcTask^WcState^WcState" Size="1"/>
+				<Link VarA="PlcTask Inputs^GVL_CouplerOnDesk.nEtherCatDevState" VarB="Inputs^DevState"/>
+				<Link VarA="PlcTask Inputs^GVL_CouplerOnDesk.nEtherCatSlaveCount" VarB="Inputs^SlaveCount"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Master (EtherCAT)^Term 1 (EK1101)">
+				<Link VarA="PlcTask Inputs^GVL_CouplerOnDesk.nCouplerId" VarB="ID^ID"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Master (EtherCAT)^Term 1 (EK1101)^Analog Input (EL3064)">
+				<Link VarA="PlcTask Inputs^GVL_CouplerOnDesk.nPotentiomerValue" VarB="AI Standard Channel 1^Value"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Master (EtherCAT)^Term 1 (EK1101)^Analog Output (EL4102)">
+				<Link VarA="PlcTask Outputs^GVL_CouplerOnDesk.nPotentiometerSupply" VarB="Channel 1^Output"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Master (EtherCAT)^Term 1 (EK1101)^Digital Input (EL1014)">
+				<Link VarA="PlcTask Inputs^GVL_CouplerOnDesk.bSelectorSwitch" VarB="Channel 1^Input" Size="1"/>
+				<Link VarA="PlcTask Inputs^GVL_CouplerOnDesk.bSelectorSwitchLeftNC" VarB="Channel 2^Input" Size="1"/>
+				<Link VarA="PlcTask Inputs^GVL_CouplerOnDesk.bSelectorSwitchRightNC" VarB="Channel 3^Input" Size="1"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Master (EtherCAT)^Term 1 (EK1101)^Digital Output (EL2004)">
+				<Link VarA="PlcTask Outputs^GVL_CouplerOnDesk.bSelectorSwitchLed" VarB="Channel 1^Output" Size="1"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Master (EtherCAT)^Term 1 (EK1101)^Display (EL6090)">
+				<Link VarA="PlcTask Inputs^GVL_CouplerOnDesk.bNavDown" VarB="DIS Inputs^Status^Down" Size="1"/>
+				<Link VarA="PlcTask Inputs^GVL_CouplerOnDesk.bNavEnter" VarB="DIS Inputs^Status^Enter" Size="1"/>
+				<Link VarA="PlcTask Inputs^GVL_CouplerOnDesk.bNavLeft" VarB="DIS Inputs^Status^Left" Size="1"/>
+				<Link VarA="PlcTask Inputs^GVL_CouplerOnDesk.bNavRight" VarB="DIS Inputs^Status^Right" Size="1"/>
+				<Link VarA="PlcTask Inputs^GVL_CouplerOnDesk.bNavUp" VarB="DIS Inputs^Status^Up" Size="1"/>
+				<Link VarA="PlcTask Outputs^GVL_CouplerOnDesk.nDisplayRow1" VarB="DIS Outputs^Value row 1"/>
+				<Link VarA="PlcTask Outputs^GVL_CouplerOnDesk.nDisplayRow2" VarB="DIS Outputs^Value row 2"/>
+			</OwnerB>
+		</OwnerA>
+	</Mappings>
+</TcSmItem>

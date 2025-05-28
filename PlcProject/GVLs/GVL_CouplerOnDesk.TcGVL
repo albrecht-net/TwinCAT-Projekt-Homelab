@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <GVL Name="GVL_CouplerOnDesk" Id="{13f1aa03-a0f5-4dff-8f1f-7d974a2345d1}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+    // Selector switch is activated (TRUE = left or right)
+    bSelectorSwitch AT %I* : BOOL;
+    // Selector switch is left (FALSE = left)
+    bSelectorSwitchLeftNC AT %I* : BOOL;
+    // Selector switch is right (FALSE = right)
+    bSelectorSwitchRightNC AT %I* : BOOL;
+    // Selector switch LED
+    bSelectorSwitchLed AT %Q* : BOOL;
+    // Potentiometer voltage tap
+    nPotentiomerValue AT %I* : INT;
+    // Potentiometer supply
+    nPotentiometerSupply AT %Q* : INT;
+    // Display navigation button Up
+    bNavUp AT %I* : BOOL;
+    // Display navigation button Down
+    bNavDown AT %I* : BOOL;
+    // Display navigation button Left
+    bNavLeft AT %I* : BOOL;
+    // Display navigation button Right
+    bNavRight AT %I* : BOOL;
+    // Display navigation button Enter
+    bNavEnter AT %I* : BOOL;
+    // Display row 1
+    nDisplayRow1 AT %Q* : INT;
+    // Display row 1
+    nDisplayRow2 AT %Q* : INT;
+
+    nEtherCatSlaveCount AT %I* : UINT;
+    nEtherCatDevState AT %I* : UINT;
+    bHotConnectGrpWcState AT %I* : BOOL;
+    bHotConnectGrpState AT %I* : UINT;
+    nCouplerId AT %I* : UINT;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

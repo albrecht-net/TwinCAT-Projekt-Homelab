@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_AuFlipFlop" Id="{cd2a7f16-c262-4156-95fc-268a64780349}" SpecialFunc="None">
+    <Declaration><![CDATA[// Hausaufgabe, AU-011-001 FlipFlop
+FUNCTION_BLOCK FB_AuFlipFlop
+VAR_INPUT
+    // Taster On, TRUE = On
+    Ix_TasterOn : BOOL;
+    // Taster Off, TRUE = Off
+    Ix_TasterOff : BOOL;
+END_VAR
+VAR_OUTPUT
+    // Ausgangsbit Anlage ein
+    Mx_AnlageEin : BOOL;
+END_VAR
+VAR
+    // Instanz Flip Flop Variante 2.1
+    fbSetDominant : SR;
+    // Instanz Flip Flop Variante 2.2
+    fbResetDominant : RS;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Damit dieser Funktionsbaustein sinnvoll genutzt werden kann (Ausgangsvariablen werden mehrmals
+// beschrieben), müssen nicht benötigte Programm-Varianten auskommentiert werden.
+// Diese Code-Sammlung dient nur den Übungszwecken der Aufgabe "AU-011-001 FlipFlop".
+// 
+// Bezeichner welche nicht in der Aufgabenstellung vorgegeben sind entsprechen den folgenden Namenskonventionen:
+//              https://infosys.beckhoff.com/content/1031/tc3_plc_intro/12073947403.html?id=915147275798565020
+//
+
+// Variante 1.1, SET dominant
+IF Ix_TasterOn THEN
+    Mx_AnlageEin := TRUE;
+ELSIF NOT Ix_TasterOff THEN
+    Mx_AnlageEin := FALSE;
+END_IF
+
+// Variante 1.2, RESET dominant
+IF Ix_TasterOff THEN
+    Mx_AnlageEin := FALSE;
+ELSIF Ix_TasterOn THEN
+    Mx_AnlageEin := TRUE;
+END_IF
+
+// Variante 2.1, SET dominant
+fbSetDominant(SET1 := Ix_TasterOn, RESET := NOT Ix_TasterOff);
+Mx_AnlageEin := fbSetDominant.Q1;
+
+// Variante 2.2, RESET dominant
+fbResetDominant(SET := Ix_TasterOn, RESET1 := Ix_TasterOff);
+Mx_AnlageEin := fbResetDominant.Q1;
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

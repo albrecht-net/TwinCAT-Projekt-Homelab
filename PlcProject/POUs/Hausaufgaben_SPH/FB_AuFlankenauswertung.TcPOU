@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="FB_AuFlankenauswertung" Id="{6cb4f963-52ca-47fd-9d39-f141af3ca3a1}" SpecialFunc="None">
+    <Declaration><![CDATA[// Hausaufgabe, AU-011-002 Flankenauswertung
+FUNCTION_BLOCK FB_AuFlankenauswertung
+VAR_INPUT
+    // Reset, TRUE = reset
+    Ix_Reset : BOOL;
+END_VAR
+VAR_OUTPUT
+    // Edge detected
+    Mx_Imp_Reset : BOOL;
+END_VAR
+VAR
+	// Status bit Reset input ist aktiv Variante 1
+	bResetIsset: BOOL;
+    // Instanz ansteigende Flankenauswertung Variante 2
+    Mx_FP_Reset : R_TRIG;
+    // Instanz fallende Flankenauswertung Variante 2
+    Mx_FN_Reset : F_TRIG;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Damit dieser Funktionsbaustein sinnvoll genutzt werden kann (beide Varianten führen die selbe Funktion aus, Ausgangsvariable
+// bildet steigende und fallende Flanke ab), sollten nicht benötigte Programm-Varianten auskommentiert werden.
+// Diese Code-Sammlung dient nur den Übungszwecken der Aufgabe "AU-011-002 Flankenauswertung".
+// 
+// Bezeichner welche nicht in der Aufgabenstellung vorgegeben sind entsprechen den folgenden Namenskonventionen:
+//              https://infosys.beckhoff.com/content/1031/tc3_plc_intro/12073947403.html?id=915147275798565020
+//
+
+{region "Variante 1"}
+// Setze Ausgang standardmässig zu FALSE
+Mx_Imp_Reset := FALSE;
+
+// Ansteigende Flankenerkennung
+IF NOT bResetIsset AND Ix_Reset THEN
+    Mx_Imp_Reset := TRUE;
+END_IF
+
+// Fallende Flankenerkennung
+IF bResetIsset AND NOT Ix_Reset THEN
+    Mx_Imp_Reset := TRUE;
+END_IF
+
+// Verknüpfung Reset Eingang mit Status bit
+bResetIsset := Ix_Reset;
+{endregion}
+
+{region "Variante 2"}
+// Ansteigende Flankenerkennung
+Mx_FP_Reset(CLK := Ix_Reset);
+// Fallende Flankenerkennung
+Mx_FN_Reset(CLK := Ix_Reset);
+
+// Zuweisung Ausgänge Ansteigende und Fallende Flankenerkennung
+Mx_Imp_Reset := Mx_FP_Reset.Q OR Mx_FN_Reset.Q;
+{endregion}
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

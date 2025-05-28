@@ -12,11 +12,11 @@
 		<Image Id="1" AddrType="9" ImageType="3">
 			<Name>Prozessabbild</Name>
 		</Image>
-		<Box File="Coupler 1 (EK1100).xti" Id="1">
+		<Box File="Term 1 (EK1101).xti" Id="1">
 			<EtherCAT PortABoxInfo="#xffffffff"/>
 		</Box>
-		<EtherCAT>
-			<SyncUnit Name="[DeskIOs]" HcName="DeskIOs"/>
+		<EtherCAT CheckSlaveIdentity="true">
+			<SyncUnit Name="[DeskGroup]" HcName="DeskGroup"/>
 		</EtherCAT>
 	</Device>
 </TcSmItem>
